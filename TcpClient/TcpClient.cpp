@@ -29,7 +29,17 @@ TcpClient::TcpClient(const char* address, int port)
     }
 }
 
-void TcpClient::sendByte(uint8_t data)
+void TcpClient::send8(uint8_t data)
 {
     send(sock , &data , 1 , 0);
+}
+
+void TcpClient::send16(uint16_t data)
+{
+    uint8_t bytes[2];
+    
+    bytes[0] = data >> 8;
+    bytes[1] = data & 0xFF;
+
+    send(sock, bytes, 2, 0);
 }

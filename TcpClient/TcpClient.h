@@ -14,7 +14,8 @@ class TcpClient
         TcpClient(const char* address, int port);
         ~TcpClient();
 
-        void sendByte(uint8_t data);
+        void send8(uint8_t data);
+        void send16(uint16_t data);
 
     private:
         int sock;
