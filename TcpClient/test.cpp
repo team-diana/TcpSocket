@@ -6,6 +6,10 @@ int main()
 
     socket->send8(256);
     socket->send16(256);
+    socket->send16(256);
+    uint16_t data16 = socket->read16();
+
+    printf("%hu\n", data16);
 
     return 0;
 }
