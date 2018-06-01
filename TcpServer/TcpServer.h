@@ -17,8 +17,9 @@ class TcpServer
 
         uint8_t read8();
         uint16_t read16();
-        void start8();
-        void start16();
+
+        void send8(uint8_t data);
+        void send16(uint16_t data);
 
     private:
         int port;

@@ -61,8 +61,17 @@ uint16_t TcpServer::read16()
     return data;
 }
 
-void TcpServer::start8()
-{}
+void TcpServer::send8(uint8_t data)
+{
+    send(my_socket, &data , 1 , 0);
+}
 
-void TcpServer::start16()
-{}
+void TcpServer::send16(uint16_t data)
+{
+    uint8_t bytes[2];
+    
+    bytes[0] = data >> 8;
+    bytes[1] = data & 0xFF;
+
+    send(my_socket, bytes, 2, 0);
+}
