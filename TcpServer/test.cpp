@@ -4,20 +4,17 @@
 
 int main()
 {
-    uint16_t data16;
-    while(true) {
-
-        std::cout << "#Creating" << std::endl;
+    uint8_t data8;
+    while(true)
+    {
         TcpServer *server = new TcpServer(8088);
-        std::cout << "#Created" << std::endl;
-        while(server->read16(&data16))
+
+        while(server->read8(&data8))
         {
-            printf("%c", data16);
+            printf("%c", data8);
         }
 
-        std::cout << "Closing" << std::endl;
         delete server;
-        std::cout << "Closed" << std::endl;
     }
 
     return 0;
