@@ -15,15 +15,12 @@ class TcpServer
         TcpServer(int port);
         ~TcpServer();
 
-        uint8_t read8();
-        uint16_t read16();
-
-        void send8(uint8_t data);
-        void send16(uint16_t data);
+        bool read8(uint8_t *data);
+        bool read16(uint16_t *data);
 
     private:
         int port;
-        int my_socket;
+        int my_socket, server_fd;
         std::vector<uint8_t> buffer8;
         std::vector<uint16_t> buffer16;
         

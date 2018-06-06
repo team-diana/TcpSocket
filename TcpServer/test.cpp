@@ -1,13 +1,24 @@
 #include "TcpServer.h"
 
+#include <iostream>
+
 int main()
 {
-    TcpServer *server = new TcpServer(8088);
+    uint16_t data16;
+    while(true) {
 
-    uint8_t data8 = server->read8();
-    uint16_t data16 = server->read16();
+        std::cout << "#Creating" << std::endl;
+        TcpServer *server = new TcpServer(8088);
+        std::cout << "#Created" << std::endl;
+        while(server->read16(&data16))
+        {
+            printf("%c", data16);
+        }
 
-    printf("%hhu\n%hu\n", data8, data16);
+        std::cout << "Closing" << std::endl;
+        delete server;
+        std::cout << "Closed" << std::endl;
+    }
 
     return 0;
 }

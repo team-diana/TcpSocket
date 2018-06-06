@@ -29,6 +29,11 @@ TcpClient::TcpClient(const char* address, int port)
     }
 }
 
+TcpClient::~TcpClient()
+{
+    close(sock);
+}
+
 void TcpClient::send8(uint8_t data)
 {
     send(sock , &data , 1 , 0);
@@ -38,28 +43,8 @@ void TcpClient::send16(uint16_t data)
 {
     uint8_t bytes[2];
     
-    bytes[0] = data >> 8;
-    bytes[1] = data & 0xFF;
+    bytes[0] = (data & 0xFF00) >> 8;
+    bytes[1] = data & 0x00FF;
 
     send(sock, bytes, 2, 0);
-}
-
-uint8_t TcpClient::read8()
-{
-    uint8_t data;
-    read(sock, &data, 1);
-
-    return data;
-}
-
-uint16_t TcpClient::read16()
-{
-    uint16_t data;
-    uint8_t bytes[2];
-    
-    read(sock, bytes, 2);
-
-    data = (bytes[0] << 8) + bytes[1];
-
-    return data;
 }

@@ -2,7 +2,7 @@
 
 TcpServer::TcpServer(int port)
 {
-    int server_fd, valread, opt = 1;
+    int valread, opt = 1;
 
     struct sockaddr_in address;
     address.sin_family = AF_INET;
@@ -41,37 +41,28 @@ TcpServer::TcpServer(int port)
     }
 }
 
-uint8_t TcpServer::read8()
+TcpServer::~TcpServer()
 {
-    uint8_t data;
-    read(my_socket, &data, 1);
-
-    return data;
+    close(server_fd);
+    close(my_socket);
 }
 
-uint16_t TcpServer::read16()
+bool TcpServer::read8(uint8_t *data)
 {
-    uint16_t data;
+    int status;
+    status = read(my_socket, data, 1);
+
+    return status == 1;
+}
+
+bool TcpServer::read16(uint16_t *data)
+{
+    int status;
     uint8_t bytes[2];
     
-    read(my_socket, bytes, 2);
+    status = read(my_socket, bytes, 2);
 
-    data = (bytes[0] << 8) + bytes[1];
+    *data = (bytes[0] << 8) + bytes[1];
 
-    return data;
-}
-
-void TcpServer::send8(uint8_t data)
-{
-    send(my_socket, &data , 1 , 0);
-}
-
-void TcpServer::send16(uint16_t data)
-{
-    uint8_t bytes[2];
-    
-    bytes[0] = data >> 8;
-    bytes[1] = data & 0xFF;
-
-    send(my_socket, bytes, 2, 0);
+    return status == 2;
 }
