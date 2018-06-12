@@ -4,15 +4,13 @@
 
 int main()
 {
-    TcpClient *socket = new TcpClient("10.0.0.100", 8088);
+    TcpClient *socket = new TcpClient("127.0.0.1", 8088);
 
-    char c;
-
-    do
+    for(uint8_t i = 0; i < 10; i++)
     {
-        c = getchar();
-        socket->send8(c);
-    } while (c != '0');
+        socket->send8(i);
+        usleep(100000);
+    }
 
     delete socket;
     return 0;

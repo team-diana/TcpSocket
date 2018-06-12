@@ -1,20 +1,20 @@
 #include "TcpServer.h"
 
-#include <iostream>
+#include <stdio.h>
+#include <unistd.h>
 
 int main()
 {
-    uint8_t data8;
+    TcpServer *server = new TcpServer(8088);
+    server->start8();
+
     while(true)
     {
-        TcpServer *server = new TcpServer(8088);
-
-        while(server->read8(&data8))
+        if(server->newDataAvailable())
         {
-            printf("%c", data8);
+            uint8_t data = server->readLast8();
+            printf("%hhu\n", data);
         }
-
-        delete server;
     }
 
     return 0;

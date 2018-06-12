@@ -7,7 +7,10 @@
 #include <stdlib.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <signal.h>
+#include <thread>
 #include <vector>
+#include <iostream>
 
 class TcpServer
 {
@@ -15,16 +18,33 @@ class TcpServer
         TcpServer(int port);
         ~TcpServer();
 
-        bool read8(uint8_t *data);
-        bool read16(uint16_t *data);
+        void start8();
+        void start16();
+
+        uint8_t readLast8();
+        uint16_t readLast16();
+
+        bool newDataAvailable();
 
     private:
         int port;
-        int my_socket, server_fd;
-        std::vector<uint8_t> buffer8;
-        std::vector<uint16_t> buffer16;
+        int server_fd;
+        struct sockaddr_in address;
+        int addrlen;
         
-        uint8_t buffer;
+        std::vector<int> sockets;
+        std::vector<std::thread> readers;
+        std::thread wc;
+
+        int bytes_waited;
+        uint8_t last8;
+        uint16_t last16;
+
+        bool new_data_available;
+
+        void waitForConnection();
+        void read8(int sockid);
+        void read16(int sockid);
 };
 
 #endif
