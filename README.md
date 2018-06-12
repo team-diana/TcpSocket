@@ -5,9 +5,10 @@ Easy interface for tcp sockets
 Easy way to create a tcp server
 
 + **TcpServer::TcpServer(int port)** Bind a socket server to the specified port
-+ **bool TcpServer::read8(uint8_t *data)** Read an 8 bit unsigned integer from the socket and put it in `data`, if it return 0 the socket is down.
-+ **bool TcpServer::read16(uint16_t *data)** Read a 16 bit unsigned integer from the socket and put it in `data`, if it return 0 the socket is down.
-
++ **void TcpServer::start8()** Start the server with an 8 bit socket
++ **void TcpServer::start16()** Start the server with a 16 bit socket
++ **uint8_t TcpServer::readLast8()** Read the last data received from the 8 bit socket
++ **uint16_t TcpServer::readLast16()** Read the last data received from the 16 bit socket
 
 ## TcpClient
 Easy way to create a tcp client
