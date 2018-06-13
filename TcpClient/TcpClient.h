@@ -17,10 +17,14 @@ class TcpClient
         void send8(uint8_t data);
         void send16(uint16_t data);
 
+        bool isConnected();
+
     private:
         int sock;
         int port;
         char address[16];
+
+        bool connected;
 };
 
 #endif

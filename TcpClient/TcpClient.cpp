@@ -8,6 +8,8 @@ TcpClient::TcpClient(const char* address, int port)
     struct sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(port);
+
+    connected = false;
     
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
@@ -27,6 +29,8 @@ TcpClient::TcpClient(const char* address, int port)
         printf("\nConnection Failed \n");
         return;
     }
+
+    connected = true;
 }
 
 TcpClient::~TcpClient()
@@ -47,4 +51,9 @@ void TcpClient::send16(uint16_t data)
     bytes[1] = data & 0x00FF;
 
     send(sock, bytes, 2, 0);
+}
+
+bool TcpClient::isConnected()
+{
+    return connected;
 }
