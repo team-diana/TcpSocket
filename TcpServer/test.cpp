@@ -6,14 +6,14 @@
 int main()
 {
     TcpServer *server = new TcpServer(8088);
-    server->start8();
+    server->start16();
 
     while(true)
     {
         if(server->newDataAvailable())
         {
-            uint8_t data = server->readLast8();
-            printf("%hhu\n", data);
+            uint16_t data = server->readLast16();
+            printf("%hu\n", data);
         }
     }
 
