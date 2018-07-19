@@ -25,6 +25,7 @@ class TcpServer
         uint16_t read16();
         uint8_t readLast8();
         uint16_t readLast16();
+        void flush();
 
         bool newDataAvailable();
 

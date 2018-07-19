@@ -11,6 +11,8 @@ Easy way to create a tcp server
 + **uint16_t TcpServer::read16()** Read the first buffered 16 bit data and remove it from the buffer
 + **uint8_t TcpServer::readLast8()** Read the last data received from the 8 bit socket and clear the buffer
 + **uint16_t TcpServer::readLast16()** Read the last data received from the 16 bit socket and clear the buffer
++ **void TcpServer::flush()** Clear the buffer
++ **bool TcpServer::newDataAvailable()** Return true if new data came from the socket, else it return false
 
 ## TcpClient
 Easy way to create a tcp client

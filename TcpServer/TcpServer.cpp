@@ -175,6 +175,13 @@ uint16_t TcpServer::read16()
     return 0;
 }
 
+void TcpServer::flush()
+{
+  vec8.clear();
+  vec16.clear();
+  new_data_available = false;
+}
+
 bool TcpServer::newDataAvailable()
 {
     return new_data_available;
