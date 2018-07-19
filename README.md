@@ -7,8 +7,10 @@ Easy way to create a tcp server
 + **TcpServer::TcpServer(int port)** Bind a socket server to the specified port
 + **void TcpServer::start8()** Start the server with an 8 bit socket
 + **void TcpServer::start16()** Start the server with a 16 bit socket
-+ **uint8_t TcpServer::readLast8()** Read the last data received from the 8 bit socket
-+ **uint16_t TcpServer::readLast16()** Read the last data received from the 16 bit socket
++ **uint8_t TcpServer::read8()** Read the first buffered 8 bit data and remove it from the buffer
++ **uint16_t TcpServer::read16()** Read the first buffered 16 bit data and remove it from the buffer
++ **uint8_t TcpServer::readLast8()** Read the last data received from the 8 bit socket and clear the buffer
++ **uint16_t TcpServer::readLast16()** Read the last data received from the 16 bit socket and clear the buffer
 
 ## TcpClient
 Easy way to create a tcp client
