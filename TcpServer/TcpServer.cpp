@@ -78,14 +78,14 @@ void TcpServer::waitForConnection()
             sockets.push_back(sock);
 
             if(bytes_waited == 1)
-                readers.push_back(std::thread(&TcpServer::read8, this, sockets.size() - 1));
+                readers.push_back(std::thread(&TcpServer::pop8, this, sockets.size() - 1));
             else if(bytes_waited == 2)
-                readers.push_back(std::thread(&TcpServer::read16, this, sockets.size() - 1));
+                readers.push_back(std::thread(&TcpServer::pop16, this, sockets.size() - 1));
         }
     }
 }
 
-void TcpServer::read8(int sockid)
+void TcpServer::pop8(int sockid)
 {
     int n_bytes;
     uint8_t data;
@@ -99,12 +99,13 @@ void TcpServer::read8(int sockid)
         else if(n_bytes == 1)
         {
             last8 = data;
+            vec8.push_back(last8);
             new_data_available = true;
         }
     }
 }
 
-void TcpServer::read16(int sockid)
+void TcpServer::pop16(int sockid)
 {
     int n_bytes;
     uint8_t data[2];
@@ -118,6 +119,7 @@ void TcpServer::read16(int sockid)
         else if(n_bytes == 2)
         {
             last16 = (data[0] * 256) + data[1];
+            vec16.push_back(last16);
             new_data_available = true;
         }
     }
@@ -126,13 +128,51 @@ void TcpServer::read16(int sockid)
 uint8_t TcpServer::readLast8()
 {
     new_data_available = false;
+    vec8.clear();
     return last8;
 }
 
 uint16_t TcpServer::readLast16()
 {
     new_data_available = false;
+    vec16.clear();
     return last16;
+}
+
+uint8_t TcpServer::read8()
+{
+  uint8_t data;
+
+  if(vec8.size() > 0)
+  {
+    data = vec8[0];
+    vec8.erase(vec8.begin());
+
+    if(vec8.size() == 0)
+      new_data_available = false;
+
+    return data;
+  }
+  else
+    return 0;
+}
+
+uint16_t TcpServer::read16()
+{
+  uint16_t data;
+
+  if(vec16.size() > 0)
+  {
+    data = vec16[0];
+    vec16.erase(vec16.begin());
+
+    if(vec16.size() == 0)
+      new_data_available = false;
+
+    return data;
+  }
+  else
+    return 0;
 }
 
 bool TcpServer::newDataAvailable()

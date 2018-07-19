@@ -4,9 +4,10 @@
 
 int main()
 {
-    TcpClient *socket = new TcpClient("127.0.0.1", 8088);
+    TcpClient *socket = new TcpClient("10.0.0.103", 50150);
 
-    socket->send16(256);
+    socket->send16(0);
+    sleep(1);
 
     delete socket;
     return 0;
