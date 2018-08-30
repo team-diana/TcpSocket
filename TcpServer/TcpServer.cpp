@@ -44,10 +44,10 @@ TcpServer::~TcpServer()
 {
   running = false;
 
-//  for(int i = 0; i < readers.size(); i++)
-//  {
-//    readers[i].join();
-//  }
+  for(int i = 0; i < readers.size(); i++)
+  {
+    readers[i].join();
+  }
 
 //  wc.join();
 
