@@ -21,9 +21,9 @@ int main()
         }
     }
 
-    printf("closing 1\n", );
+    printf("closing 1\n");
     delete(server1);
-    printf("closing2\n", );
+    printf("closing2\n");
     delete(server2);
 
     return 0;
