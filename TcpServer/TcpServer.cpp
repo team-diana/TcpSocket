@@ -49,7 +49,7 @@ TcpServer::~TcpServer()
 //    readers[i].join();
 //  }
 
-  wc.join();
+//  wc.join();
 
   close(server_fd);
 
