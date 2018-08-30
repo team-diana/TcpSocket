@@ -44,7 +44,7 @@ TcpServer::~TcpServer()
 {
   running = false;
 
-  wc.join();
+  wc.detach();
 
   close(server_fd);
 
@@ -92,8 +92,6 @@ void TcpServer::waitForConnection()
     {
       readers[i].join();
     }
-
-    std::terminate();
 }
 
 void TcpServer::pop8(int sockid)
