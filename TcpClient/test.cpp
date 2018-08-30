@@ -21,7 +21,6 @@ int main()
           while(!socket1->isConnected())
           {
             printf("Reconnecting!\n");
-            delete(socket1);
             socket1 = new TcpClient(IP, 50100);
           }
 
@@ -34,7 +33,6 @@ int main()
           while(!socket2->isConnected())
           {
             printf("Reconnecting!\n");
-            delete(socket2);
             socket2 = new TcpClient(IP, 50100);
           }
 
