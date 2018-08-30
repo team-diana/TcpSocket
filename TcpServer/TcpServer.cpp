@@ -44,11 +44,6 @@ TcpServer::~TcpServer()
 {
   running = false;
 
-  for(int i = 0; i < readers.size(); i++)
-  {
-    readers[i].join();
-  }
-
 //  wc.join();
 
   close(server_fd);
@@ -93,7 +88,11 @@ void TcpServer::waitForConnection()
         }
     }
 
-    close(sock);
+    for(int i = 0; i < readers.size(); i++)
+    {
+      readers[i].join();
+    }
+
     exit(0);
 }
 
