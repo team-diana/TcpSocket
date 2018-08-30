@@ -42,21 +42,23 @@ TcpServer::TcpServer(int port)
 
 TcpServer::~TcpServer()
 {
-    for(int i = 0; i < readers.size(); i++)
-    {
-      readers[i].join();
-    }
+  running = false;
 
-    wc.join();
+  for(int i = 0; i < readers.size(); i++)
+  {
+    readers[i].join();
+  }
 
-    close(server_fd);
+  wc.join();
 
-    for(int i = 0; i < sockets.size(); i++)
-    {
-        close(sockets[i]);
-    }
+  close(server_fd);
 
-    sockets.clear();
+  for(int i = 0; i < sockets.size(); i++)
+  {
+    close(sockets[i]);
+  }
+
+  sockets.clear();
 }
 
 void TcpServer::start8()
@@ -75,7 +77,7 @@ void TcpServer::waitForConnection()
 {
     int sock;
 
-    while(true)
+    while(running)
     {
         if ((sock = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0)
         {
@@ -97,7 +99,7 @@ void TcpServer::pop8(int sockid)
     int n_bytes;
     uint8_t data;
 
-    while(true)
+    while(running)
     {
         n_bytes = read(sockets[sockid], &data, 1);
 
@@ -117,7 +119,7 @@ void TcpServer::pop16(int sockid)
     int n_bytes;
     uint8_t data[2];
 
-    while(true)
+    while(running)
     {
         n_bytes = read(sockets[sockid], data, 2);
 

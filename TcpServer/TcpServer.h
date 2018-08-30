@@ -46,6 +46,7 @@ class TcpServer
         std::vector<uint16_t> vec16;
 
         bool new_data_available;
+        bool running = true;
 
         void waitForConnection();
         void pop8(int sockid);
