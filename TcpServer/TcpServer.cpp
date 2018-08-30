@@ -44,7 +44,7 @@ TcpServer::~TcpServer()
 {
   running = false;
 
-//  wc.join();
+  wc.join();
 
   close(server_fd);
 
