@@ -92,6 +92,8 @@ void TcpServer::waitForConnection()
                 readers.push_back(std::thread(&TcpServer::pop16, this, sockets.size() - 1));
         }
     }
+
+    delete(sock);
 }
 
 void TcpServer::pop8(int sockid)
