@@ -15,29 +15,20 @@ int main()
     while(true)
     {
         scanf("%hu", &data1);
-        socket1->send16(data1);
+
         if(!socket1->isConnected())
         {
-          do
-          {
-            printf("Reconnecting!\n");
-            socket1 = new TcpClient(IP, 50100);
-          } while(socket1 != NULL);
-
-          socket1->send16(data1);
+            printf("Reconnecting 1!\n");
         }
+        else
+          socket1->send16(data1);
 
-        socket2->send16(data1);
         if(!socket2->isConnected())
         {
-          do
-          {
-            printf("Reconnecting!\n");
-            socket2 = new TcpClient(IP, 50101);
-          } while(socket2 != NULL);
-
-          socket2->send16(data1);
+            printf("Reconnecting 2!\n");
         }
+        else
+          socket2->send16(data1);
     }
 
     printf("Closing!\n");
