@@ -41,7 +41,7 @@ TcpClient::~TcpClient()
 
 void TcpClient::send8(uint8_t data)
 {
-  int sent = send(sock , &data , 1 , 0);
+  int sent = send(sock , &data , 1 , MSG_NOSIGNAL);
 
   if(sent != 1)
   {
@@ -56,11 +56,10 @@ void TcpClient::send16(uint16_t data)
     bytes[0] = (data & 0xFF00) >> 8;
     bytes[1] = data & 0x00FF;
 
-    int sent = send(sock, bytes, 2, 0);
+    int sent = send(sock, bytes, 2, MSG_NOSIGNAL);
 
     if(sent != 2)
     {
-      printf("NO\n");
       connected = false;
     }
 }

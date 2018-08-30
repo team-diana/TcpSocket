@@ -20,6 +20,7 @@ int main()
         {
             printf("Reconnecting 1!\n");
             socket1 = new TcpClient(IP, 50100);
+            socket1->isConnected();
         }
         else if(socket1 != NULL)
           socket1->send16(data1);
