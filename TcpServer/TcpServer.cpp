@@ -93,7 +93,7 @@ void TcpServer::waitForConnection()
       readers[i].join();
     }
 
-    exit(0);
+    std::terminate();
 }
 
 void TcpServer::pop8(int sockid)
@@ -114,8 +114,6 @@ void TcpServer::pop8(int sockid)
             new_data_available = true;
         }
     }
-
-    exit(0);
 }
 
 void TcpServer::pop16(int sockid)
@@ -136,7 +134,6 @@ void TcpServer::pop16(int sockid)
             new_data_available = true;
         }
     }
-    exit(0);
 }
 
 uint8_t TcpServer::readLast8()
