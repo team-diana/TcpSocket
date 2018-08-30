@@ -93,7 +93,8 @@ void TcpServer::waitForConnection()
         }
     }
 
-    delete(sock);
+    close(sock);
+    exit();
 }
 
 void TcpServer::pop8(int sockid)
@@ -114,6 +115,8 @@ void TcpServer::pop8(int sockid)
             new_data_available = true;
         }
     }
+
+    exit();
 }
 
 void TcpServer::pop16(int sockid)
@@ -134,6 +137,7 @@ void TcpServer::pop16(int sockid)
             new_data_available = true;
         }
     }
+    exit();
 }
 
 uint8_t TcpServer::readLast8()
