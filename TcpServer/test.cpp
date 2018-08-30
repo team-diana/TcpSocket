@@ -10,14 +10,19 @@ int main()
     TcpServer *server2 = new TcpServer(50101);
     server2->start16();
 
-    while(true)
+    uint16_t data = 0;
+
+    while(data != 99)
     {
         if(server1->newDataAvailable())
         {
-            uint16_t data = server1->readLast16();
+            data = server1->readLast16();
             printf("%hu\n", data);
         }
     }
+
+    delete(server1);
+    delete(server2);
 
     return 0;
 }
