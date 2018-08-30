@@ -19,6 +19,12 @@ int main()
             data = server1->readLast16();
             printf("%hu\n", data);
         }
+
+        if(server2->newDataAvailable())
+        {
+            data = server2->readLast16();
+            printf("%hu\n", data);
+        }
     }
 
     printf("closing 1\n");

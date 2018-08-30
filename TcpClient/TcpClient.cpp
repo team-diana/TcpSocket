@@ -11,7 +11,7 @@ TcpClient::TcpClient(const char* address, int port)
 
     connected = false;
 
-    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    if((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("\n Socket creation error \n");
         return;
@@ -24,9 +24,10 @@ TcpClient::TcpClient(const char* address, int port)
         return;
     }
 
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    if(connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
     {
         printf("\nConnection Failed \n");
+        close(sock);
         return;
     }
 
@@ -59,6 +60,7 @@ void TcpClient::send16(uint16_t data)
 
     if(sent != 2)
     {
+      printf("NO\n");
       connected = false;
     }
 }

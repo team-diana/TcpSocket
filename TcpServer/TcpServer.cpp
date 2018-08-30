@@ -46,8 +46,6 @@ TcpServer::~TcpServer()
 
   wc.join();
 
-  printf("Joined\n");
-
   close(server_fd);
 
   for(int i = 0; i < sockets.size(); i++)

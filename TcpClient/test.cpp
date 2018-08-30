@@ -19,15 +19,17 @@ int main()
         if(!socket1->isConnected())
         {
             printf("Reconnecting 1!\n");
+            socket1 = new TcpClient(IP, 50100);
         }
-        else
+        else if(socket1 != NULL)
           socket1->send16(data1);
 
         if(!socket2->isConnected())
         {
             printf("Reconnecting 2!\n");
+            socket2 = new TcpClient(IP, 50101);
         }
-        else
+        else if(socket2 != NULL)
           socket2->send16(data1);
     }
 
