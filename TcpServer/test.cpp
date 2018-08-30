@@ -5,14 +5,16 @@
 
 int main()
 {
-    TcpServer *server = new TcpServer(8088);
-    server->start16();
+    TcpServer *server1 = new TcpServer(50100);
+    server1->start16();
+    TcpServer *server2 = new TcpServer(50101);
+    server2->start16();
 
     while(true)
     {
-        if(server->newDataAvailable())
+        if(server1->newDataAvailable())
         {
-            uint16_t data = server->readLast16();
+            uint16_t data = server1->readLast16();
             printf("%hu\n", data);
         }
     }
