@@ -42,6 +42,13 @@ TcpServer::TcpServer(int port)
 
 TcpServer::~TcpServer()
 {
+    for(int i = 0; i < readers.size(); i++)
+    {
+      readers[i].join();
+    }
+
+    wc.join();
+
     close(server_fd);
 
     for(int i = 0; i < sockets.size(); i++)

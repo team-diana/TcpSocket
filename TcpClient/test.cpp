@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define IP "10.0.0.100"
+#define IP "10.0.0.105"
 
 int main()
 {
@@ -15,7 +15,7 @@ int main()
     while(true)
     {
         scanf("%hu", &data1);
-        socket1->send16(data1);        
+        socket1->send16(data1);
         if(!socket1->isConnected())
         {
           while(!socket1->isConnected())
