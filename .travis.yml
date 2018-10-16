@@ -9,3 +9,11 @@ script:
   - cd build
   - cmake ..
   - make
+
+  - cd ../..
+
+  - cd TcpClient/
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
