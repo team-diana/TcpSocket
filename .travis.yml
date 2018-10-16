@@ -3,21 +3,12 @@ dist: trusty
 
 language: C++
 
-jobs:
-  include:
-    - stage: test
-      script:
-        - cd TcpServer/
-        - mkdir build
-        - cd build
-        - cmake ..
-        - make
-      script:
-        - cd TcpClient/
-        - mkdir build
-        - cd build
-        - cmake ..
-        - make
+script:
+  - cd TcpServer/
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
 
 notifications:
   email: false
