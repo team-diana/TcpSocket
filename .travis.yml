@@ -10,5 +10,12 @@ script:
   - cmake ..
   - make
 
+script:
+  - cd TcpClient/
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+
 notifications:
   email: false
