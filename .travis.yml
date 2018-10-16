@@ -1,4 +1,11 @@
 sudo: required
 dist: trusty
+
 language: C++
 
+script:
+  cd TcpServer/
+  makedir build
+  cd build
+  cmake ..
+  make
