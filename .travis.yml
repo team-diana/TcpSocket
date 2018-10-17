@@ -4,7 +4,6 @@ dist: trusty
 language: C++
 
 script:
-  - cd TcpServer/
   - mkdir build
   - cd build
   - cmake ..
