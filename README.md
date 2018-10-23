@@ -1,7 +1,7 @@
 # TcpSocket
 Easy interface for tcp sockets
 
-[![Build Status](https://travis-ci.com/team-diana/TcpSocket.svg?branch=master)
+[![Build Status](https://travis-ci.org/team-diana/TcpSocket.svg?branch=master)](https://travis-ci.org/team-diana/TcpSocket)
 
 ## TcpServer
 Easy way to create a tcp server
